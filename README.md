@@ -3,7 +3,7 @@
 ## GIT TUTORIAL
 ### Primeira configuração
 
-- Crie um clone do repositório: git clone <link-para-o-repositorio>
+- Crie um clone do repositório: git clone link-para-o-repositorio
 
 - Entre na pasta criada pelo comando clone: cd /nomeDoRepositório
 
