@@ -1,11 +1,15 @@
 #include "Grafo.h"
-
+#include "ListaAjacencia.h"
 Grafo::Grafo(int numVertices)
 {
-    listaVertices = new No[numVertices];
+    Grafo::vertices = new ListaAjacencia[numVertices];
 }
 
 Grafo::~Grafo()
 {
-    delete [] listaVertices;
+    delete [] vertices;
+}
+
+void Grafo::adicinarAresta(int vertice, int verticeAdjacente){
+    Grafo::vertices[vertice].inserir(verticeAdjacente);
 }

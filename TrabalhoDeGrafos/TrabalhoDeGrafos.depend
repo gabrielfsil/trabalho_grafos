@@ -1,14 +1,27 @@
 # depslib dependency file v1.0
-1602361550 source:/home/joao_lima/Git/trabalho_grafos/TrabalhoDeGrafos/main.cpp
+1602365813 source:/home/joao_lima/Git/trabalho_grafos/TrabalhoDeGrafos/main.cpp
 	<iostream>
+	<fstream>
+	<string>
 
 1602362882 source:/home/joao_lima/Git/trabalho_grafos/TrabalhoDeGrafos/src/No.cpp
 	"No.h"
 
 1602362968 /home/joao_lima/Git/trabalho_grafos/TrabalhoDeGrafos/include/No.h
 
-1602362686 source:/home/joao_lima/Git/trabalho_grafos/TrabalhoDeGrafos/src/ListaAjacencia.cpp
+1602363870 source:/home/joao_lima/Git/trabalho_grafos/TrabalhoDeGrafos/src/ListaAjacencia.cpp
+	<iostream>
+	<cstdlib>
+	"ListaAjacencia.h"
+	"No.h"
+
+1602363456 /home/joao_lima/Git/trabalho_grafos/TrabalhoDeGrafos/include/ListaAjacencia.h
+	"No.h"
+
+1602364803 source:/home/joao_lima/Git/trabalho_grafos/TrabalhoDeGrafos/src/Grafo.cpp
+	"Grafo.h"
 	"ListaAjacencia.h"
 
-1602362686 /home/joao_lima/Git/trabalho_grafos/TrabalhoDeGrafos/include/ListaAjacencia.h
+1602364796 /home/joao_lima/Git/trabalho_grafos/TrabalhoDeGrafos/include/Grafo.h
+	"ListaAjacencia.h"
 

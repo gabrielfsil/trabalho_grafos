@@ -1,16 +1,16 @@
 #ifndef GRAFO_H
 #define GRAFO_H
-#include "No.h"
+#include "ListaAjacencia.h"
+
 
 class Grafo
 {
     public:
         Grafo(int numVertices);
         ~Grafo();
-
+        void adicinarAresta(int vertice, int verticeAdjacente);
     private:
-        No* listaVertices;
-
+        ListaAjacencia* vertices;
 };
 
 #endif // GRAFO_H
