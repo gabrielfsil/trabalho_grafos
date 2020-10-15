@@ -1,6 +1,9 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <bits/stdc++.h>
+#include<stdlib.h>
+#include "Grafo.h"
 using namespace std;
 
 string readFile(string fileDirectory){
@@ -28,7 +31,12 @@ string readFile(string fileDirectory){
 
 int main () {
 
-
-  string allFile = readFile("/home/joao_lima/Git/trabalho_grafos/ExemploInstancias.txt");
+  Grafo* grafo = new Grafo(3);
+  grafo->adicinarAdjacencia(0,1);
+  grafo->adicinarAdjacencia(1,2);
+  grafo->adicinarAdjacencia(2,0);
+  grafo->imprimeGrafo();
+  
+  delete grafo;
   return 0;
 }
