@@ -1,5 +1,13 @@
 # trabalho_grafos
 
+## Execução
+
+Na pasta do repositório execute o seguinte comando:
+
+```
+cd TrabalhoDeGrafos && g++ *.cpp && ./a.out ../ExemploInstancias.txt
+```
+
 ## GIT TUTORIAL
 ### Primeira configuração
 

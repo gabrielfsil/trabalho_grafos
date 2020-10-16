@@ -7,6 +7,9 @@
 #include "Grafo.h"
 using namespace std;
 
+// Lê a aresta do grafo e separa os vértices e o peso em um array de 3 posições
+// Transforma o formato string do arquivo em um tipo int
+// array [] = [ Vértice, Vértice Adjacente, Peso ]
 void split(string str, char separator, int array[])
 {
     istringstream iss;
@@ -16,6 +19,10 @@ void split(string str, char separator, int array[])
     iss.str(str);
 
     // "0 1 25"
+    // array[0] = 0
+    // array[1] = 1
+    // array[2] = 25
+
     for (int i = 0; i < 3; i++)
     {
         int val;
@@ -26,6 +33,7 @@ void split(string str, char separator, int array[])
     }
     
     return;
+
 }
 
 Grafo *readGrafo(string fileDirectory)
@@ -49,16 +57,19 @@ Grafo *readGrafo(string fileDirectory)
             {
                 int aresta[3];
 
+                // Lê a linha e insere os vértices e peso 
+                // no array passado no parametro da função
                 split(line, ' ', aresta);
 
-                // cout << aresta[0] << " - " << aresta[1] << endl;
-
+                // Adiciona a aresta no grafo
                 grafo->adicinarAdjacencia(aresta[0], aresta[1]);
             }
             else
             {
+                // Chama o construtor do grafo passando o número de vértices como parâmetro
                 numVertices = stoi(line);
                 grafo = new Grafo(numVertices);
+
             }
         }
 
@@ -78,15 +89,13 @@ int main(int argc, char *argv[])
 
     Grafo *grafo;
 
+    // Lê o grafo no arquivo de entrada
     grafo = readGrafo(argv[1]);
 
-    // Grafo *grafo = new Grafo(3);
-    // grafo->adicinarAdjacencia(0, 1);
-    // grafo->adicinarAdjacencia(1, 2);
-    // grafo->adicinarAdjacencia(2, 0);
     grafo->imprimeGrafo();
 
     delete grafo;
 
     return 0;
+    
 }
