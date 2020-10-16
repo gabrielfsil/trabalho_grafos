@@ -1,41 +1,34 @@
 #include <iostream>
 #include <fstream>
+#include <sstream>
 #include <string>
 #include <bits/stdc++.h>
 #include <stdlib.h>
 #include "Grafo.h"
 using namespace std;
 
-string *split(string str, char separator)
+void split(string str, char separator, int array[])
 {
-
-    int start = 0;
-    int end = str.length();
-
-    string *array = new string[end];
+    istringstream iss;
 
     int index = 0;
 
+    iss.str(str);
+
     // "0 1 25"
-    for (int i = 0; i < end; i++)
+    for (int i = 0; i < 3; i++)
     {
-
-        if (str[i] == separator && str[i - 1] != separator)
-        {
-
-            array[index] = str.substr(start, i - start);
-
-            start = i + 1;
-            index++;
-        }
+        int val;
+        iss >> val;
+        array[index] = val;
+        index++;
+        
     }
-
-    array[index] = str.substr(start, end - 1);
-
-    return array;
+    
+    return;
 }
 
-Grafo* readGrafo(string fileDirectory)
+Grafo *readGrafo(string fileDirectory)
 {
 
     Grafo *grafo;
@@ -46,8 +39,6 @@ Grafo* readGrafo(string fileDirectory)
 
     ifstream myfile(fileDirectory);
 
-    string * aresta;
-
     if (myfile.is_open())
     {
         while (!myfile.eof())
@@ -56,17 +47,21 @@ Grafo* readGrafo(string fileDirectory)
 
             if (numVertices != 0)
             {
+                int aresta[3];
 
-                aresta = split(line, ' ');
-                grafo->adicinarAdjacencia(std::stoi(aresta[0]), std::stoi(aresta[1]));
-                
+                split(line, ' ', aresta);
+
+                // cout << aresta[0] << " - " << aresta[1] << endl;
+
+                grafo->adicinarAdjacencia(aresta[0], aresta[1]);
             }
             else
             {
-                numVertices = std::stoi(line);
+                numVertices = stoi(line);
                 grafo = new Grafo(numVertices);
             }
         }
+
         myfile.close();
     }
     else
@@ -75,15 +70,14 @@ Grafo* readGrafo(string fileDirectory)
         exit(1);
     }
 
-    delete [] aresta;
-
     return grafo;
 }
 
 int main(int argc, char *argv[])
 {
 
-    Grafo* grafo;
+    Grafo *grafo;
+
     grafo = readGrafo(argv[1]);
 
     // Grafo *grafo = new Grafo(3);

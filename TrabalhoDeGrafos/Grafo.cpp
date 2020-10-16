@@ -12,18 +12,22 @@ Grafo::Grafo(int numVertices)
 
 Grafo::~Grafo()
 {
-    delete [] vertices;
+    delete[] vertices;
 }
 
-void Grafo::adicinarAdjacencia(int vertice, int verticeAdjacente){
+void Grafo::adicinarAdjacencia(int vertice, int verticeAdjacente)
+{
+
     Grafo::vertices[vertice].inserir(verticeAdjacente);
     Grafo::vertices[verticeAdjacente].inserir(vertice);
-
+    
 }
 
-void Grafo::imprimeGrafo(){
-    for(int i = 0; i < numVertices; i++){
-        cout <<"[" << i << "]: ";
+void Grafo::imprimeGrafo()
+{
+    for (int i = 0; i < numVertices; i++)
+    {
+        cout << "[" << i << "]: ";
         vertices[i].imprime();
         cout << endl;
     }
