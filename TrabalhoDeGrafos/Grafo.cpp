@@ -31,4 +31,40 @@ void Grafo::imprimeGrafo()
         vertices[i].imprime();
         cout << endl;
     }
+
+}
+
+void Grafo::frequenciaRelativaGraus()
+{
+   
+    //vetor para guardar a quantidade de vezes que o grau de um vértice aparece
+    //considerando que o grau máximo de um vértice é N-1
+    int * contadorDeGraus = new int [numVertices];
+
+    //inicializando vetor com 0
+
+    for(int i = 0; i<=numVertices; i++)
+    {
+      contadorDeGraus[i] = 0;
+    }
+
+    //cada posição do contador de graus é o grau em si
+    //a função tamanho retorna o grau do vértice, então adicionamos 1 ao vetor nessa posição
+ 
+
+    for (int i = 0; i < numVertices; i++)
+    {
+        //cout << contadorDeGraus[i] << endl;
+       int grauDoVertice = vertices[i].tamanho();
+       contadorDeGraus[grauDoVertice] = contadorDeGraus[grauDoVertice] + 1;
+    }
+    
+    //assim temos as frequências absolutas, depois cada uma é dividida pela quantidade de nós
+    //então temos a frequência relativa de cada grau
+    for (int i = 0; i < numVertices; i++)
+    {
+        float frquencia = float (contadorDeGraus[i])/numVertices;
+        frquencia = frquencia * 100;
+        cout << "Frequencia relativa para grau " << i << ": " << frquencia << "%" << endl;
+    }
 }

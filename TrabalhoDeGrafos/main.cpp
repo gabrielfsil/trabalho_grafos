@@ -94,7 +94,11 @@ int main(int argc, char *argv[])
 
     grafo->imprimeGrafo();
 
+    grafo->frequenciaRelativaGraus();
+    
     delete grafo;
+
+    system("pause");
 
     return 0;
     
