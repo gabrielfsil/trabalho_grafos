@@ -93,6 +93,7 @@ int main(int argc, char *argv[])
     grafo = readGrafo(argv[1]);
 
     grafo->imprimeGrafo();
+    grafo->caminhoMinimoDijkstra(2);
 
     delete grafo;
 

@@ -10,7 +10,8 @@ class ListaAdjacencia
     int get(int k);
     void inserir(int val);
     void imprime();
-
+    int tamanho();
+    
 private:
     No *primeiro;
 };

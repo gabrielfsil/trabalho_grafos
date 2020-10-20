@@ -10,6 +10,7 @@ class Grafo
         ~Grafo();
         void adicinarAdjacencia(int vertice, int verticeAdjacente);
         void imprimeGrafo();
+        void caminhoMinimoDijkstra(int origem);
     private:
         ListaAdjacencia* vertices;
         int numVertices;
