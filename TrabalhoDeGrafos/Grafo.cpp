@@ -32,3 +32,14 @@ void Grafo::imprimeGrafo()
         cout << endl;
     }
 }
+
+int Grafo::grauMedioDoGrafo()
+{
+    int somaDosGraus = 0;
+    for (int i = 0; i < numVertices; i++)
+    {
+        somaDosGraus += vertices[i].tamanho();
+    }
+    return (somaDosGraus/numVertices);
+}
+

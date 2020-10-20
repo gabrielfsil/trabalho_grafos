@@ -10,6 +10,7 @@ class Grafo
         ~Grafo();
         void adicinarAdjacencia(int vertice, int verticeAdjacente);
         void imprimeGrafo();
+        int grauMedioDoGrafo();
     private:
         ListaAdjacencia* vertices;
         int numVertices;
