@@ -13,7 +13,7 @@ ListaAdjacencia::ListaAdjacencia()
 ListaAdjacencia::~ListaAdjacencia()
 {
     No *p = primeiro;
-    while(p != NULL)
+    while (p != NULL)
     {
         No *t = p->getProx();
         delete p;
@@ -21,15 +21,16 @@ ListaAdjacencia::~ListaAdjacencia()
     }
 }
 
-int ListaAdjacencia::get(int k){
+int ListaAdjacencia::get(int k)
+{
     No *p = primeiro;
     int i = 0;
-    while(i < k && p != NULL)
+    while (i < k && p != NULL)
     {
         i++;
         p = p->getProx();
     }
-    if(p == NULL)
+    if (p == NULL)
     {
         exit(1);
     }
@@ -37,24 +38,32 @@ int ListaAdjacencia::get(int k){
         return p->getInfo();
 }
 
-void ListaAdjacencia::inserir(int val){
-    No* p = new No(val);
+void ListaAdjacencia::inserir(int val)
+{
+    No *p = new No(val);
     p->setProx(NULL);
-    if(primeiro == NULL){
+    if (primeiro == NULL)
+    {
         primeiro = p;
-    } else {
-        No* t = primeiro;
-        while(t->getProx() != NULL){
+    }
+    else
+    {
+        No *t = primeiro;
+        while (t->getProx() != NULL)
+        {
             t = t->getProx();
         }
         t->setProx(p);
     }
 }
 
-void ListaAdjacencia::imprime(){
-    No* p = primeiro;
-    while(p != NULL){
-        cout << p->getInfo() << " -> ";
+void ListaAdjacencia::imprime()
+{
+    No *p = primeiro;
+    while (p != NULL)
+    {
+
+        cout << " -> " << p->getInfo();
         p = p->getProx();
     }
 }

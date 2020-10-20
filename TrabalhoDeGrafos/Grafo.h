@@ -10,9 +10,14 @@ class Grafo
         ~Grafo();
         void adicinarAdjacencia(int vertice, int verticeAdjacente);
         void imprimeGrafo();
+        void adicionarPeso(int vertice, int verticeAdjacente, int peso);
+        void imprimirMatrizPeso();
+        void arvoreGeradoraPrim();
+
     private:
         ListaAdjacencia* vertices;
         int numVertices;
+        int** pesos;
 };
 
 #endif // GRAFO_H
