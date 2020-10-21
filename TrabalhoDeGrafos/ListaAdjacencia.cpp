@@ -58,3 +58,13 @@ void ListaAdjacencia::imprime(){
         p = p->getProx();
     }
 }
+
+int ListaAdjacencia::tamanho(){
+    No* p = primeiro;
+    int tamanho = 0;
+    while(p != NULL){
+        tamanho++;
+        p = p->getProx();
+    }
+    return tamanho;
+}
