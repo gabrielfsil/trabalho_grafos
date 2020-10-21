@@ -11,6 +11,7 @@ class Grafo
         void adicinarAdjacencia(int vertice, int verticeAdjacente);
         void imprimeGrafo();
         int grauMedioDoGrafo();
+        void caminhoMinimoDijkstra(int origem);
     private:
         ListaAdjacencia* vertices;
         int numVertices;
