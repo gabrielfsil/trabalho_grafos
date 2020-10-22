@@ -98,7 +98,7 @@ int main(int argc, char *argv[])
     
     delete grafo;
 
-    system("pause");
+    //system("pause");
 
     return 0;
     
