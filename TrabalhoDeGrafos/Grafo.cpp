@@ -61,10 +61,13 @@ void Grafo::frequenciaRelativaGraus()
     
     //assim temos as frequências absolutas, depois cada uma é dividida pela quantidade de nós
     //então temos a frequência relativa de cada grau
+    cout<< "Frequencia relativa de cada grau" <<endl;
     for (int i = 0; i < numVertices; i++)
     {
         float frquencia = float (contadorDeGraus[i])/numVertices;
         frquencia = frquencia * 100;
-        cout << "Frequencia relativa para grau " << i << ": " << frquencia << "%" << endl;
+        cout << "Grau " << i << ": " << frquencia << "%" << endl;
     }
+
+    delete[] contadorDeGraus;
 }
