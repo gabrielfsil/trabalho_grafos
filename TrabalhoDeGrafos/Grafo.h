@@ -13,6 +13,7 @@ class Grafo
         void frequenciaRelativaGraus();
         int grauMedioDoGrafo();
         void caminhoMinimoDijkstra(int origem);
+        int getNumVertices();
     private:
         ListaAdjacencia* vertices;
         int numVertices;

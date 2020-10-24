@@ -161,3 +161,7 @@ void Grafo::caminhoMinimoDijkstra(int origem)
     delete [] abertos;
 
 }
+
+int Grafo::getNumVertices(){
+    return numVertices;
+}
