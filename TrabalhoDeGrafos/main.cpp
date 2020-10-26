@@ -97,7 +97,8 @@ int main(int argc, char *argv[])
     while (comando != 0)
     {
 
-        cout << endl << "======= Menu =======" << endl
+        cout << endl
+             << "=========== Menu ===========" << endl
              << endl;
         cout << "[1] Caminhamento em Largura" << endl;
         cout << "[2] Caminhamento em Profundidade" << endl;
@@ -105,9 +106,13 @@ int main(int argc, char *argv[])
         cout << "[4] Floyd: Caminho Mínimo" << endl;
         cout << "[5] Prim: Árvore Geradora" << endl;
         cout << "[6] Kruskal: Árvore Geradora Mínima;" << endl;
-        cout << "====================" << endl;
+        cout << endl
+             << "[0] Sair" << endl;
+        cout << endl
+             << "============================" << endl;
 
-        cout << endl << "Escolha uma das operações do menu: ";
+        cout << endl
+             << "Escolha uma das operações do menu: ";
         cin >> comando;
 
         cout << endl;
@@ -131,6 +136,7 @@ int main(int argc, char *argv[])
             break;
         case 6:
             // Árvore Geradora Mínima por Kruskal no grafo
+            grafo->arvoreGeradoraMinimaKruskal();
             break;
 
         default:

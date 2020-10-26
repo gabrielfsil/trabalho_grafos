@@ -13,6 +13,7 @@ class Grafo
         void adicionarPeso(int vertice, int verticeAdjacente, int peso);
         void imprimirMatrizPeso();
         void arvoreGeradoraPrim();
+        void arvoreGeradoraMinimaKruskal();
 
     private:
         ListaAdjacencia* vertices;

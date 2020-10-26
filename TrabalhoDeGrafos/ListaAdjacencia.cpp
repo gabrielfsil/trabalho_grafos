@@ -32,7 +32,7 @@ int ListaAdjacencia::get(int k)
     }
     if (p == NULL)
     {
-        exit(1);
+        return -1;
     }
     else
         return p->getInfo();
