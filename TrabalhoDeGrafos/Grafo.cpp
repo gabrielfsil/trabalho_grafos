@@ -37,7 +37,7 @@ void Grafo::adicinarAdjacencia(int vertice, int verticeAdjacente)
     Grafo::vertices[verticeAdjacente].inserir(vertice);
 }
 
-void Grafo::numArestas()
+int Grafo::numArestas()
 {
     int somaGrau = 0;
     int numArestas=0;
