@@ -14,6 +14,7 @@ class Grafo
         void imprimirMatrizPeso();
         void arvoreGeradoraPrim();
         void arvoreGeradoraMinimaKruskal();
+        void numArestas();
 
         void frequenciaRelativaGraus();
         int grauMedioDoGrafo();
