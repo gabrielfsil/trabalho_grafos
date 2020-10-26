@@ -94,6 +94,8 @@ int main(int argc, char *argv[])
 
     int comando = -1;
 
+    grafo->imprimeGrafo();
+
     while (comando != 0)
     {
 
@@ -129,7 +131,7 @@ int main(int argc, char *argv[])
             grafo->caminhoMinimoDijkstra(0);
             break;
         case 4:
-            // Busca caminho mínimo por no grafo
+            // Busca caminho mínimo por Floyd no grafo
             break;
         case 5:
             // Árvore Geradora por Prim no grafo
