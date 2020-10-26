@@ -1,2 +1,5 @@
 /TrabalhoDeGrafos/*.o
+/TrabalhoDeGrafos/*.exe
+
+/TrabalhoDeGrafos/*.out
 .vscode

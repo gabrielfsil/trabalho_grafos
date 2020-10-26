@@ -126,6 +126,7 @@ int main(int argc, char *argv[])
             break;
         case 3:
             // Busca caminho mínimo por Dijkstra no grafo
+            grafo->caminhoMinimoDijkstra(0);
             break;
         case 4:
             // Busca caminho mínimo por no grafo
@@ -151,7 +152,11 @@ int main(int argc, char *argv[])
          << "Obrigado pela preferência!" << endl;
     cout << "Volte sempre! ;)" << endl;
 
+    grafo->frequenciaRelativaGraus();
+
     delete grafo;
+
+    system("pause");
 
     return 0;
 }

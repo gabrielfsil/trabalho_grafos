@@ -67,3 +67,14 @@ void ListaAdjacencia::imprime()
         p = p->getProx();
     }
 }
+
+//Essa função conta a quantidade de vértices presentes na lista de adjacencia de um vértice, ou seja, conta quantos vizinhos ele tem, o que também signfica quantas arestas incidem neste vértice;
+int ListaAdjacencia::tamanho(){
+    int tamanho = 0;
+    No* p = primeiro;
+    while(p != NULL){
+        tamanho++;
+        p = p->getProx();
+    }
+    return tamanho;
+}

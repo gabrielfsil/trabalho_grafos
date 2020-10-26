@@ -15,6 +15,9 @@ class Grafo
         void arvoreGeradoraPrim();
         void arvoreGeradoraMinimaKruskal();
 
+        void frequenciaRelativaGraus();
+        int grauMedioDoGrafo();
+        void caminhoMinimoDijkstra(int origem);
     private:
         ListaAdjacencia* vertices;
         int numVertices;
