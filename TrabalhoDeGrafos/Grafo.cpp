@@ -510,3 +510,93 @@ void Grafo::arvoreGeradoraMinimaKruskal()
     delete[] conjuntoT;
     delete[] listAresta;
 }
+
+void Grafo::imprimeUmaMatriz(int **matriz)
+{
+    for (int i = -1; i < numVertices; i++)
+    {
+        if (i == -1)
+        {
+            cout << "    ";
+            for (int j = 0; j < numVertices; j++)
+            {
+
+                cout << j << "   ";
+            }
+
+            cout << endl;
+        }
+        else
+        {
+            cout << i << " | ";
+
+            for (int j = 0; j < numVertices; j++)
+            {
+                if(!(existeAdjacencia(i,j))){
+                    cout << "-" << "  ";
+
+                }
+               else{
+                    cout << matriz[i][j] << " ";
+               }
+            }
+
+            cout << endl;
+        }
+    }
+    
+}
+
+bool Grafo::existeAdjacencia(int i, int j)
+{
+    for(int k=0; k< vertices[i].tamanho(); k++){
+        if(vertices[i].get(k)== j){
+            return true;
+        }
+    }
+    return false;
+}
+
+void Grafo::caminhoMinimoFloyd()
+{
+    //Matriz L guardando todas as distâncias entre os vértices (peso das arestas)
+    int ** L = pesos;
+    //Vértice k = intermediário por onde passamos para percorrer um caminho entre os vértics i e j
+    int i, j, k;
+
+    int infinito = INT8_MAX;
+
+    int maior =0;
+    //tratando matriz de pesos para remover lixo de memória
+    for(int i =0; i<numVertices;i++)
+    {
+        for(j=0;j<numVertices; j++)
+        {
+            if(!existeAdjacencia(i,j))
+            {
+                L[i][j] = infinito;
+            }
+        }
+    }
+
+    //implementação alogritmo de Floyd
+    for(k =0; k <numVertices; k++)
+    {
+        for(i=0; i<numVertices; i++)
+        {
+            for(j=0; j<numVertices; j++)
+            {
+                if(L[i][k] < infinito && L[k][j] < infinito)
+                {
+                    if(L[i][j] > (L [i][k] + L[k][j]))
+                        L[i][j] = L [i][k] + L[k][j];
+                }     
+            }
+        }
+    }
+
+    //Imprimindomenores caminhos para cada par de vértices
+    imprimeUmaMatriz(L);
+    
+}
+

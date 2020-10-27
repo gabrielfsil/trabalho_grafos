@@ -111,7 +111,7 @@ int main(int argc, char *argv[])
     // Lê o grafo no arquivo de entrada
     grafo = readGrafo(argv[1]);
 
-    int comando = -1;
+    /*int comando = -1;
 
     while (comando != 0)
     {
@@ -169,11 +169,14 @@ int main(int argc, char *argv[])
          << "Encerrando programa..." << endl;
     cout << endl
          << "Obrigado pela preferência!" << endl;
-    cout << "Volte sempre! ;)" << endl;
+    cout << "Volte sempre! ;)" << endl;*/
 
     grafo->imprimeGrafo();
+    grafo->imprimirMatrizPeso();
+    cout << "    "<< endl;
 
-    escreveSaida(grafo, argv[2]);
+    grafo->caminhoMinimoFloyd();
+    //escreveSaida(grafo, argv[2]);
 
     delete grafo;
 
