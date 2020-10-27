@@ -1,6 +1,9 @@
 #include "Grafo.h"
 #include "ListaAdjacencia.h"
 #include <iostream>
+#include <fstream>
+
+
 
 using namespace std;
 
@@ -23,18 +26,19 @@ void Grafo::adicinarAdjacencia(int vertice, int verticeAdjacente)
     
 }
 
-void Grafo::imprimeGrafo()
+void Grafo::imprimeGrafo(ofstream &outfile)
 {
+    outfile << "Grafo: " << endl;
     for (int i = 0; i < numVertices; i++)
     {
-        cout << "[" << i << "]: ";
-        vertices[i].imprime();
-        cout << endl;
+        outfile << "[" << i << "]: ";
+        vertices[i].imprime(outfile);
+        outfile << endl;
     }
 
 }
 
-void Grafo::frequenciaRelativaGraus()
+void Grafo::frequenciaRelativaGraus(ofstream &outfile)
 {
    
     //vetor para guardar a quantidade de vezes que o grau de um vértice aparece
@@ -61,15 +65,15 @@ void Grafo::frequenciaRelativaGraus()
     
     //assim temos as frequências absolutas, depois cada uma é dividida pela quantidade de nós
     //então temos a frequência relativa de cada grau
-    cout<< "" <<endl;
-    cout<< "Frequencia relativa de cada grau" <<endl;
-    cout<< "" <<endl;
+    outfile << "" <<endl;
+    outfile << "Frequencia relativa de cada grau" <<endl;
+    outfile << "" <<endl;
 
     for (int i = 0; i < numVertices; i++)
     {
         float frquencia = float (contadorDeGraus[i])/numVertices;
         frquencia = frquencia * 100;
-        cout << "Grau " << i << ": " << frquencia << "%" << endl;
+        outfile << "Grau " << i << ": " << frquencia << "%" << endl;
     }
 
     delete[] contadorDeGraus;

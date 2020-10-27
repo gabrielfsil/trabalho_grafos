@@ -1,6 +1,8 @@
 #ifndef ListaAdjacencia_H
 #define ListaAdjacencia_H
 #include "No.h"
+#include <fstream>
+using namespace std;
 
 class ListaAdjacencia
 {
@@ -9,7 +11,7 @@ class ListaAdjacencia
         ~ListaAdjacencia();
         int get(int k);
         void inserir(int val);
-        void imprime();
+        void imprime(ofstream &outfile);
         int tamanho();
     private:
         No *primeiro;

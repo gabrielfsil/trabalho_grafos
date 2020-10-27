@@ -1,6 +1,8 @@
 #ifndef GRAFO_H
 #define GRAFO_H
 #include "ListaAdjacencia.h"
+#include <fstream>
+using namespace std;
 
 
 class Grafo
@@ -9,8 +11,8 @@ class Grafo
         Grafo(int numVertices);
         ~Grafo();
         void adicinarAdjacencia(int vertice, int verticeAdjacente);
-        void imprimeGrafo();
-        void frequenciaRelativaGraus();
+        void imprimeGrafo(ofstream &outfile);
+        void frequenciaRelativaGraus(ofstream &outfile);
         int grauMedioDoGrafo();
         void caminhoMinimoDijkstra(int origem);
     private:

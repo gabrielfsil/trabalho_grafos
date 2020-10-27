@@ -92,10 +92,15 @@ int main(int argc, char *argv[])
     // Lê o grafo no arquivo de entrada
     grafo = readGrafo(argv[1]);
 
-    grafo->imprimeGrafo();
+    //Abrindo arquivo de saída
+    ofstream outfile(argv[2]);
 
-    grafo->frequenciaRelativaGraus();
+    grafo->imprimeGrafo(outfile);
+
+    grafo->frequenciaRelativaGraus(outfile);
     
+    outfile.close();
+
     delete grafo;
 
     system("pause");
