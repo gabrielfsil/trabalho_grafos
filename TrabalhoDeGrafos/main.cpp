@@ -29,11 +29,9 @@ void split(string str, char separator, int array[])
         iss >> val;
         array[index] = val;
         index++;
-        
     }
-    
-    return;
 
+    return;
 }
 
 Grafo *readGrafo(string fileDirectory)
@@ -57,19 +55,21 @@ Grafo *readGrafo(string fileDirectory)
             {
                 int aresta[3];
 
-                // Lê a linha e insere os vértices e peso 
+                // Lê a linha e insere os vértices e peso
                 // no array passado no parametro da função
                 split(line, ' ', aresta);
 
                 // Adiciona a aresta no grafo
                 grafo->adicinarAdjacencia(aresta[0], aresta[1]);
+
+                grafo->adicionarPeso(aresta[0], aresta[1], aresta[2]);
+                grafo->adicionarPeso(aresta[1], aresta[0], aresta[2]);
             }
             else
             {
                 // Chama o construtor do grafo passando o número de vértices como parâmetro
                 numVertices = stoi(line);
                 grafo = new Grafo(numVertices);
-
             }
         }
 
@@ -84,6 +84,25 @@ Grafo *readGrafo(string fileDirectory)
     return grafo;
 }
 
+void escreveSaida(Grafo *grafo, string fileDirectory)
+{
+    //Abrindo arquivo de saída
+    ofstream outfile(fileDirectory);
+
+    grafo->imprimeGrafoSaida(outfile);
+
+    outfile << "" << endl;
+
+    outfile << "Numero de vertices: " << grafo->getNumVertices() << endl;
+
+    outfile << "" << endl;
+
+    outfile << "Numero de arestas: " << grafo->numArestas() << endl;
+
+    grafo->frequenciaRelativaGraus(outfile);
+    
+    outfile.close();
+}
 int main(int argc, char *argv[])
 {
 
@@ -92,19 +111,13 @@ int main(int argc, char *argv[])
     // Lê o grafo no arquivo de entrada
     grafo = readGrafo(argv[1]);
 
-    //Abrindo arquivo de saída
-    ofstream outfile(argv[2]);
+    grafo->imprimeGrafo();
 
-    grafo->imprimeGrafo(outfile);
-
-    grafo->frequenciaRelativaGraus(outfile);
-    
-    outfile.close();
+    escreveSaida(grafo, argv[2]);
 
     delete grafo;
 
     system("pause");
 
     return 0;
-    
 }

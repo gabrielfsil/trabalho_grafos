@@ -11,7 +11,9 @@ class ListaAdjacencia
         ~ListaAdjacencia();
         int get(int k);
         void inserir(int val);
-        void imprime(ofstream &outfile);
+        void imprime();
+        void imprimeSaida(ofstream &outfile);
+        
         int tamanho();
     private:
         No *primeiro;

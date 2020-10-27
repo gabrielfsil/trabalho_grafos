@@ -8,6 +8,12 @@ Na pasta do repositório execute o seguinte comando:
 cd TrabalhoDeGrafos && g++ *.cpp && ./a.out ../ExemploInstancias.txt
 ```
 
+Se já estiver na pasta TrabalhoDeGrafos basta executar o seguinte comando:
+
+```
+g++ *.cpp && ./a.out ../ExemploInstancias.txt
+```
+
 ## GIT TUTORIAL
 ### Primeira configuração
 
