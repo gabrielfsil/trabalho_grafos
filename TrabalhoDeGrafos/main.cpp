@@ -29,11 +29,9 @@ void split(string str, char separator, int array[])
         iss >> val;
         array[index] = val;
         index++;
-        
     }
-    
-    return;
 
+    return;
 }
 
 Grafo *readGrafo(string fileDirectory)
@@ -57,19 +55,21 @@ Grafo *readGrafo(string fileDirectory)
             {
                 int aresta[3];
 
-                // Lê a linha e insere os vértices e peso 
+                // Lê a linha e insere os vértices e peso
                 // no array passado no parametro da função
                 split(line, ' ', aresta);
 
                 // Adiciona a aresta no grafo
                 grafo->adicinarAdjacencia(aresta[0], aresta[1]);
+
+                grafo->adicionarPeso(aresta[0], aresta[1], aresta[2]);
+                grafo->adicionarPeso(aresta[1], aresta[0], aresta[2]);
             }
             else
             {
                 // Chama o construtor do grafo passando o número de vértices como parâmetro
                 numVertices = stoi(line);
                 grafo = new Grafo(numVertices);
-
             }
         }
 
@@ -92,14 +92,71 @@ int main(int argc, char *argv[])
     // Lê o grafo no arquivo de entrada
     grafo = readGrafo(argv[1]);
 
-    grafo->imprimeGrafo();
+    int comando = -1;
+
+    while (comando != 0)
+    {
+
+        cout << endl
+             << "=========== Menu ===========" << endl
+             << endl;
+        cout << "[1] Caminhamento em Largura" << endl;
+        cout << "[2] Caminhamento em Profundidade" << endl;
+        cout << "[3] Dijkstra: Caminho Mínimo" << endl;
+        cout << "[4] Floyd: Caminho Mínimo" << endl;
+        cout << "[5] Prim: Árvore Geradora" << endl;
+        cout << "[6] Kruskal: Árvore Geradora Mínima;" << endl;
+        cout << endl
+             << "[0] Sair" << endl;
+        cout << endl
+             << "============================" << endl;
+
+        cout << endl
+             << "Escolha uma das operações do menu: ";
+        cin >> comando;
+
+        cout << endl;
+        switch (comando)
+        {
+        case 1:
+            // Realiza caminhamento em largura no grafo
+            break;
+        case 2:
+            // Realiza caminhamento em profundidade no grafo
+            break;
+        case 3:
+            // Busca caminho mínimo por Dijkstra no grafo
+            grafo->caminhoMinimoDijkstra(0);
+            break;
+        case 4:
+            // Busca caminho mínimo por no grafo
+            break;
+        case 5:
+            // Árvore Geradora por Prim no grafo
+            grafo->arvoreGeradoraPrim();
+            break;
+        case 6:
+            // Árvore Geradora Mínima por Kruskal no grafo
+            grafo->arvoreGeradoraMinimaKruskal();
+            break;
+
+        default:
+            comando = 0;
+            break;
+        }
+    }
+
+    cout << endl
+         << "Encerrando programa..." << endl;
+    cout << endl
+         << "Obrigado pela preferência!" << endl;
+    cout << "Volte sempre! ;)" << endl;
 
     grafo->frequenciaRelativaGraus();
-    
+
     delete grafo;
 
     system("pause");
 
     return 0;
-    
 }
