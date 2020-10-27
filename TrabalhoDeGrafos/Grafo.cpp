@@ -3,6 +3,9 @@
 #include "Aresta.h"
 #include "No.h"
 #include <iostream>
+#include <fstream>
+
+
 
 using namespace std;
 
@@ -37,8 +40,21 @@ void Grafo::adicinarAdjacencia(int vertice, int verticeAdjacente)
     Grafo::vertices[verticeAdjacente].inserir(vertice);
 }
 
+int Grafo::numArestas()
+{
+    int somaGrau = 0;
+    int numArestas=0;
+    for (int i = 0; i < numVertices; i++)
+    {
+        somaGrau += vertices[i].tamanho();
+    }
+    numArestas = somaGrau/2;
+    return numArestas;
+}
+
 void Grafo::imprimeGrafo()
 {
+    cout << "Grafo: " << endl;
     for (int i = 0; i < numVertices; i++)
     {
         cout << "[" << i << "]: ";
@@ -47,7 +63,19 @@ void Grafo::imprimeGrafo()
     }
 }
 
-void Grafo::frequenciaRelativaGraus()
+void Grafo::imprimeGrafoSaida(ofstream &outfile)
+{
+    outfile << "Grafo: " << endl;
+    for (int i = 0; i < numVertices; i++)
+    {
+        outfile << "[" << i << "]: ";
+        vertices[i].imprimeSaida(outfile);
+        outfile << endl;
+    }
+
+}
+
+void Grafo::frequenciaRelativaGraus(ofstream &outfile)
 {
 
     //vetor para guardar a quantidade de vezes que o grau de um vértice aparece
@@ -73,15 +101,15 @@ void Grafo::frequenciaRelativaGraus()
 
     //assim temos as frequências absolutas, depois cada uma é dividida pela quantidade de nós
     //então temos a frequência relativa de cada grau
-    cout << "" << endl;
-    cout << "Frequencia relativa de cada grau" << endl;
-    cout << "" << endl;
+    outfile << "" <<endl;
+    outfile << "Frequencia relativa de cada grau" <<endl;
+    outfile << "" <<endl;
 
     for (int i = 0; i < numVertices; i++)
     {
         float frquencia = float(contadorDeGraus[i]) / numVertices;
         frquencia = frquencia * 100;
-        cout << "Grau " << i << ": " << frquencia << "%" << endl;
+        outfile << "Grau " << i << ": " << frquencia << "%" << endl;
     }
 
     delete[] contadorDeGraus;
@@ -184,6 +212,9 @@ void Grafo::caminhoMinimoDijkstra(int origem)
     delete[] abertos;
 }
 
+int Grafo::getNumVertices(){
+    return numVertices;
+}
 void Grafo::adicionarPeso(int vertice, int verticeAdjacente, int peso)
 {
 

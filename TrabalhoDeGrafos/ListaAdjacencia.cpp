@@ -2,6 +2,8 @@
 #include <cstdlib>
 #include "ListaAdjacencia.h"
 #include "No.h"
+#include <fstream>
+
 
 using namespace std;
 
@@ -57,13 +59,22 @@ void ListaAdjacencia::inserir(int val)
     }
 }
 
-void ListaAdjacencia::imprime()
-{
-    No *p = primeiro;
-    while (p != NULL)
-    {
+void ListaAdjacencia::imprime(){
+    No* p = primeiro;
+    while(p != NULL){
+        cout << p->getInfo() ;
+        if(p->getProx()!=NULL)
+        cout << " -> ";
+        p = p->getProx();
+    }
+}
 
-        cout << " -> " << p->getInfo();
+void ListaAdjacencia::imprimeSaida(ofstream &outfile){
+    No* p = primeiro;
+    while(p != NULL){
+        outfile << p->getInfo() ;
+        if(p->getProx()!=NULL)
+        outfile << " -> ";        
         p = p->getProx();
     }
 }

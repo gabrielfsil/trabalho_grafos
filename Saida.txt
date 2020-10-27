@@ -1,0 +1,20 @@
+Grafo: 
+[0]: 1 -> 3 -> 4
+[1]: 0 -> 4
+[2]: 3
+[3]: 2 -> 0 -> 4
+[4]: 3 -> 1 -> 0
+
+Numero de vertices: 5
+
+Numero de arestas: 6
+
+Grau médio do grafo: 2
+
+Frequencia relativa de cada grau
+
+Grau 0: 0%
+Grau 1: 20%
+Grau 2: 20%
+Grau 3: 60%
+Grau 4: 0%

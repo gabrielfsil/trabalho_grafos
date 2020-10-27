@@ -5,13 +5,13 @@
 Na pasta do repositório execute o seguinte comando:
 
 ```
-cd TrabalhoDeGrafos && g++ *.cpp && ./a.out ../ExemploInstancias.txt
+cd TrabalhoDeGrafos && g++ *.cpp && ./a.out ../ExemploInstancias.txt ../Saida.txt
 ```
 
 Se já estiver na pasta TrabalhoDeGrafos basta executar o seguinte comando:
 
 ```
-g++ *.cpp && ./a.out ../ExemploInstancias.txt
+g++ *.cpp && ./a.out ../ExemploInstancias.txt ../Saida.txt
 ```
 
 ## GIT TUTORIAL

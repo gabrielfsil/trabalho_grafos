@@ -84,6 +84,29 @@ Grafo *readGrafo(string fileDirectory)
     return grafo;
 }
 
+void escreveSaida(Grafo *grafo, string fileDirectory)
+{
+    //Abrindo arquivo de saída
+    ofstream outfile(fileDirectory);
+
+    grafo->imprimeGrafoSaida(outfile);
+
+    outfile << "" << endl;
+
+    outfile << "Numero de vertices: " << grafo->getNumVertices() << endl;
+
+    outfile << "" << endl;
+
+    outfile << "Numero de arestas: " << grafo->numArestas() << endl;
+
+    outfile << "" << endl;
+
+    outfile << "Grau médio do grafo: " << grafo->grauMedioDoGrafo() << endl;
+
+    grafo->frequenciaRelativaGraus(outfile);
+    
+    outfile.close();
+}
 int main(int argc, char *argv[])
 {
 
@@ -154,7 +177,9 @@ int main(int argc, char *argv[])
          << "Obrigado pela preferência!" << endl;
     cout << "Volte sempre! ;)" << endl;
 
-    grafo->frequenciaRelativaGraus();
+    grafo->imprimeGrafo();
+
+    escreveSaida(grafo, argv[2]);
 
     delete grafo;
 
