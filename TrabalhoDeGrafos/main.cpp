@@ -172,7 +172,7 @@ int main(int argc, char *argv[])
     cout << "Volte sempre! ;)" << endl;*/
 
     grafo->imprimeGrafo();
-    grafo->imprimirMatrizPeso();
+   // grafo->imprimirMatrizPeso();
     cout << "    "<< endl;
 
     grafo->caminhoMinimoFloyd();

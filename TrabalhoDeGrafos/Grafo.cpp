@@ -513,6 +513,8 @@ void Grafo::arvoreGeradoraMinimaKruskal()
 
 void Grafo::imprimeUmaMatriz(int **matriz)
 {
+    int infinito = INT8_MAX;
+
     for (int i = -1; i < numVertices; i++)
     {
         if (i == -1)
@@ -532,7 +534,7 @@ void Grafo::imprimeUmaMatriz(int **matriz)
 
             for (int j = 0; j < numVertices; j++)
             {
-                if(!(existeAdjacencia(i,j))){
+                if(matriz[i][j]==infinito){
                     cout << "-" << "  ";
 
                 }
@@ -568,7 +570,7 @@ void Grafo::caminhoMinimoFloyd()
 
     int maior =0;
     //tratando matriz de pesos para remover lixo de memória
-    for(int i =0; i<numVertices;i++)
+    for(i =0; i<numVertices;i++)
     {
         for(j=0;j<numVertices; j++)
         {
@@ -585,12 +587,17 @@ void Grafo::caminhoMinimoFloyd()
         for(i=0; i<numVertices; i++)
         {
             for(j=0; j<numVertices; j++)
+
             {
-                if(L[i][k] < infinito && L[k][j] < infinito)
+
+                //Checa se o custo da origem até o nó atual é menor do que o custo 
+                //saindo da oriegm e passando por um nó intermediário até o nó atual
+        
+                if(L[i][j] > (L [i][k] + L[k][j]))
                 {
-                    if(L[i][j] > (L [i][k] + L[k][j]))
-                        L[i][j] = L [i][k] + L[k][j];
-                }     
+                    L[i][j] = L [i][k] + L[k][j];
+
+                }
             }
         }
     }
