@@ -4,7 +4,7 @@
 #include "No.h"
 #include <iostream>
 #include <fstream>
-
+#include <list>
 
 
 using namespace std;
@@ -525,4 +525,40 @@ void Grafo::arvoreGeradoraMinimaKruskal()
          << "*******************************************" << endl;
     delete[] conjuntoT;
     delete[] listAresta;
+}
+
+void Grafo::buscaLargura(int origem) {
+    int i;
+    bool *visitados = new bool[numVertices];
+
+    //marca todos os vertices como nao visitados
+    for(i=0; i<numVertices; i++){
+        visitados[i] = false;
+    }
+
+    list<int> fila;
+
+    //marca o vertice atual como visitado e coloca na fila
+    visitados[origem] = true;
+    fila.push_back(origem);
+
+    //list<int>::iterator it;
+
+    while (!fila.empty())
+    {   
+        int j;
+        //tira da fila e printa
+        origem = fila.front();
+        cout << origem << " ";
+        fila.pop_front();
+
+        for(i=0; i < vertices[origem].tamanho(); i++){
+            j = vertices[origem].get(i);
+            if(!visitados[j] && j > origem){//verifico se n foi visitado e se é filho
+                visitados[j] = true;
+                fila.push_back(j);
+            }
+        }
+    }
+    
 }
