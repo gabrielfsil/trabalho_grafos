@@ -542,8 +542,6 @@ void Grafo::buscaLargura(int origem) {
     visitados[origem] = true;
     fila.push_back(origem);
 
-    //list<int>::iterator it;
-
     while (!fila.empty())
     {   
         int j;
