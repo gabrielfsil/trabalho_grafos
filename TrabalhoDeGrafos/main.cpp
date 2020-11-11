@@ -111,7 +111,7 @@ int main(int argc, char *argv[])
     // Lê o grafo no arquivo de entrada
     grafo = readGrafo(argv[1]);
 
-    /*int comando = -1;
+    int comando = -1;
 
     while (comando != 0)
     {
@@ -149,6 +149,7 @@ int main(int argc, char *argv[])
             break;
         case 4:
             // Busca caminho mínimo por no grafo
+            grafo->caminhoMinimoFloyd();
             break;
         case 5:
             // Árvore Geradora por Prim no grafo
@@ -169,14 +170,13 @@ int main(int argc, char *argv[])
          << "Encerrando programa..." << endl;
     cout << endl
          << "Obrigado pela preferência!" << endl;
-    cout << "Volte sempre! ;)" << endl;*/
+    cout << "Volte sempre! ;)" << endl;
 
     grafo->imprimeGrafo();
-   // grafo->imprimirMatrizPeso();
+    grafo->imprimirMatrizPeso();
     cout << "    "<< endl;
 
-    grafo->caminhoMinimoFloyd();
-    //escreveSaida(grafo, argv[2]);
+    escreveSaida(grafo, argv[2]);
 
     delete grafo;
 

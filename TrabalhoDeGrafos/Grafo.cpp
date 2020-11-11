@@ -4,6 +4,8 @@
 #include "No.h"
 #include <iostream>
 #include <fstream>
+#include <iomanip>  
+
 
 
 
@@ -237,7 +239,14 @@ void Grafo::imprimirMatrizPeso()
             for (int j = 0; j < numVertices; j++)
             {
 
-                cout << pesos[i][j] << "  ";
+                if(existeAdjacencia(i,j))
+                {
+                    cout << pesos[i][j] << "  ";
+                }
+                else
+                {
+                    cout << '-' << "  ";
+                }
             }
 
             cout << endl;
@@ -511,10 +520,33 @@ void Grafo::arvoreGeradoraMinimaKruskal()
     delete[] listAresta;
 }
 
-void Grafo::imprimeUmaMatriz(int **matriz)
+void Grafo::imprimeMatriz(int **matriz, int maiorValor, int menorNegativo)
 {
+
+    int digitos = 1;
+    int dezena = 10;
     int infinito = INT8_MAX;
 
+   if(menorNegativo!=0)
+   {
+        while((menorNegativo/dezena)!=0)
+        {
+            digitos++;
+            dezena = dezena * 10;
+        }
+        digitos++;
+    
+   }
+   else
+   {
+       while((maiorValor/dezena)!=0)
+    {
+        digitos++;
+        dezena = dezena * 10;
+    }
+    
+   }
+   
     for (int i = -1; i < numVertices; i++)
     {
         if (i == -1)
@@ -523,7 +555,10 @@ void Grafo::imprimeUmaMatriz(int **matriz)
             for (int j = 0; j < numVertices; j++)
             {
 
-                cout << j << "   ";
+               cout << setw (digitos+1);
+               cout << j ;
+               cout << "  ";
+
             }
 
             cout << endl;
@@ -534,19 +569,20 @@ void Grafo::imprimeUmaMatriz(int **matriz)
 
             for (int j = 0; j < numVertices; j++)
             {
+                cout << "[" << setw(digitos);
+
                 if(matriz[i][j]==infinito){
-                    cout << "-" << "  ";
+                    cout << "X" << "]";
 
                 }
                else{
-                    cout << matriz[i][j] << " ";
+                    cout << matriz[i][j] << "] ";
                }
             }
 
             cout << endl;
         }
     }
-    
 }
 
 bool Grafo::existeAdjacencia(int i, int j)
@@ -566,17 +602,19 @@ void Grafo::caminhoMinimoFloyd()
     //Vértice k = intermediário por onde passamos para percorrer um caminho entre os vértics i e j
     int i, j, k;
 
+    //variavel pra guardar o maior valor da matriz para fim de formataçãp
+    //na impressão
+    int maior =0; int menor = 0;
+
     int infinito = INT8_MAX;
 
-    int maior =0;
-    //tratando matriz de pesos para remover lixo de memória
-    for(i =0; i<numVertices;i++)
+    for(int i =0; i<numVertices;i++)
     {
-        for(j=0;j<numVertices; j++)
+        for(int j=0;j<numVertices; j++)
         {
             if(!existeAdjacencia(i,j))
             {
-                L[i][j] = infinito;
+                pesos[i][j] = infinito;
             }
         }
     }
@@ -589,21 +627,44 @@ void Grafo::caminhoMinimoFloyd()
             for(j=0; j<numVertices; j++)
 
             {
+                //Define que o menor caminho de um vértice pra ele mesmo é 0
+                if(i==j)
+                L[i][j] = 0;
 
                 //Checa se o custo da origem até o nó atual é menor do que o custo 
-                //saindo da oriegm e passando por um nó intermediário até o nó atual
-        
-                if(L[i][j] > (L [i][k] + L[k][j]))
-                {
-                    L[i][j] = L [i][k] + L[k][j];
+                //saindo da origem e passando por um nó intermediário até o nó atual
 
+                //E também se há presença de ciclo negativo
+                
+                if(((L[i][k] < infinito) && (L[k][j] < infinito)) && L[i][j]>0) 
+                {
+                    if(L[i][j] > (L[i][k] + L[k][j]))
+                    {
+                        L[i][j] = L[i][k] + L[k][j];
+
+                        if(L[i][j]>maior)
+                        maior = L[i][j];
+
+                        if(L[i][j]<menor)
+                        menor = L[i][j];
+
+                    }
+                }
+                else
+                {
+                    if(L[i][j]<0)
+                    {
+                        L[i][j] = infinito;
+                    }
                 }
             }
         }
     }
+    
+    cout << "Floyd caminho minimo entre todos os pares de vertices" << endl;
+    cout << "" << endl;
 
     //Imprimindomenores caminhos para cada par de vértices
-    imprimeUmaMatriz(L);
+    imprimeMatriz(L, maior, menor);
     
 }
-

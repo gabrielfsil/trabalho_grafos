@@ -23,7 +23,7 @@ class Grafo
         void caminhoMinimoDijkstra(int origem);
         int getNumVertices();
         void caminhoMinimoFloyd();
-        void imprimeUmaMatriz(int **matriz);
+        void imprimeMatriz(int **matriz, int maiorValor, int menorNegativo);
         bool existeAdjacencia(int i, int j);
 
     private:
