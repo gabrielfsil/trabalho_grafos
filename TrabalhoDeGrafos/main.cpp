@@ -145,6 +145,7 @@ int main(int argc, char *argv[])
         {
         case 1:
             // Realiza caminhamento em largura no grafo
+            grafo->buscaLargura(0);
             break;
         case 2:
             // Realiza caminhamento em profundidade no grafo

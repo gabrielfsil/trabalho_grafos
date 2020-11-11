@@ -22,7 +22,7 @@ class Grafo
         void frequenciaRelativaGraus(ofstream &outfile);
         void caminhoMinimoDijkstra(int origem);
         int getNumVertices();
-        void buscaLargura(int atual);
+        void buscaLargura(int origem);
     private:
         ListaAdjacencia* vertices;
         int numVertices;
