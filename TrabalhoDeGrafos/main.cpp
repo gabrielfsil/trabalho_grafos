@@ -237,7 +237,11 @@ int main(int argc, char *argv[])
             break;
         case 3:
             // Busca caminho mínimo por Dijkstra no grafo
-            grafo->caminhoMinimoDijkstra(0);
+            int vertice;
+            cout << "Escolha um valor entre 0 e " << grafo->getNumVertices() - 1 << ": " << endl;
+            cin >> vertice;
+
+            grafo->caminhoMinimoDijkstra(vertice);
             break;
         case 4:
             // Busca caminho mínimo por Floyd no grafo
