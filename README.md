@@ -14,6 +14,16 @@ Se já estiver na pasta TrabalhoDeGrafos basta executar o seguinte comando:
 g++ *.cpp && ./a.out ../ExemploInstancias.txt ../Saida.txt
 ```
 
+Para executar usando o formato de instâncias com peso nos vértices, execute o comando:
+
+```
+cd TrabalhoDeGrafos && g++ *.cpp && ./a.out ../Instancias/Problem.dat_50_50_0 ../Saida.txt
+```
+
+```
+g++ *.cpp && ./a.out ../Instancias/Problem.dat_50_50_0 ../Saida.txt
+```
+
 ## GIT TUTORIAL
 ### Primeira configuração
 
