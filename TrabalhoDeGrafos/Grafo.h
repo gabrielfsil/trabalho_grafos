@@ -29,6 +29,6 @@ class Grafo
         ListaAdjacencia* vertices;
         int numVertices;
         int** pesos;
-
+};
 
 #endif // GRAFO_H
