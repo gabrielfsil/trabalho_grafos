@@ -560,3 +560,61 @@ void Grafo::buscaLargura(int origem) {
     }
     
 }
+
+// Algoritmo Recursivo Profundidade
+// Recebe o índece de um nó e o vetor de visitados
+void Grafo::PROF(int index, bool visitados[])
+{
+
+    // Marca o vértice index como visitado
+    visitados[index] = true;
+
+    // Imprime o vértice
+    cout << "Vértice visitado: " << index << endl;
+
+    int j = 0;
+
+    // Pega o primeiro adjacente do vertice index
+    int verticeAdjacente = vertices[index].get(0);
+
+    // Percorre todos os adjacentes ao vértice index no while
+    while (verticeAdjacente != -1)
+    {
+        // Se o adjacente não foi visitado
+        if (!visitados[verticeAdjacente])
+        {
+
+            // Então visita o adjaente
+            Grafo::PROF(verticeAdjacente, visitados);
+
+        }
+
+        // Próximo adjacente
+        j++;
+        verticeAdjacente = vertices[index].get(j);
+    }
+}
+
+// Busca em Profundidade
+void Grafo::buscaProf()
+{
+    // Vetor de Visitos
+    bool visitados[numVertices];
+
+    // Marcou todos como não visitados
+    for (int i = 0; i < numVertices; i++)
+    {
+        visitados[i] = false;
+    }
+
+    // Percorre todos os vertices do grafo
+    for (int i = 0; i < numVertices; i++)
+    {
+        // Se o vertice não foi visitado
+        if (!visitados[i])
+        {
+            // Então visita o vértice i
+            Grafo::PROF(i, visitados);
+        }
+    }
+}

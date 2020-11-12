@@ -149,6 +149,7 @@ int main(int argc, char *argv[])
             break;
         case 2:
             // Realiza caminhamento em profundidade no grafo
+             grafo->buscaProf(0);
             break;
         case 3:
             // Busca caminho mínimo por Dijkstra no grafo

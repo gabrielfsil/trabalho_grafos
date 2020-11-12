@@ -23,10 +23,12 @@ class Grafo
         void caminhoMinimoDijkstra(int origem);
         int getNumVertices();
         void buscaLargura(int origem);
+        void buscaProf();
     private:
+        void PROF(int index, bool visitados[]);
         ListaAdjacencia* vertices;
         int numVertices;
         int** pesos;
-};
+
 
 #endif // GRAFO_H
