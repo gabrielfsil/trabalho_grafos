@@ -6,7 +6,6 @@
 #include <fstream>
 #include <list>
 
-
 using namespace std;
 
 Grafo::Grafo(int numVertices)
@@ -43,12 +42,12 @@ void Grafo::adicinarAdjacencia(int vertice, int verticeAdjacente)
 int Grafo::numArestas()
 {
     int somaGrau = 0;
-    int numArestas=0;
+    int numArestas = 0;
     for (int i = 0; i < numVertices; i++)
     {
         somaGrau += vertices[i].tamanho();
     }
-    numArestas = somaGrau/2;
+    numArestas = somaGrau / 2;
     return numArestas;
 }
 
@@ -72,7 +71,6 @@ void Grafo::imprimeGrafoSaida(ofstream &outfile)
         vertices[i].imprimeSaida(outfile);
         outfile << endl;
     }
-
 }
 
 void Grafo::frequenciaRelativaGraus(ofstream &outfile)
@@ -101,9 +99,9 @@ void Grafo::frequenciaRelativaGraus(ofstream &outfile)
 
     //assim temos as frequências absolutas, depois cada uma é dividida pela quantidade de nós
     //então temos a frequência relativa de cada grau
-    outfile << "" <<endl;
-    outfile << "Frequencia relativa de cada grau" <<endl;
-    outfile << "" <<endl;
+    outfile << "" << endl;
+    outfile << "Frequencia relativa de cada grau" << endl;
+    outfile << "" << endl;
 
     for (int i = 0; i < numVertices; i++)
     {
@@ -212,7 +210,8 @@ void Grafo::caminhoMinimoDijkstra(int origem)
     delete[] abertos;
 }
 
-int Grafo::getNumVertices(){
+int Grafo::getNumVertices()
+{
     return numVertices;
 }
 void Grafo::adicionarPeso(int vertice, int verticeAdjacente, int peso)
@@ -266,7 +265,7 @@ void Grafo::arvoreGeradoraPrim()
     cin >> i;
 
     // Enquanto o valor do vértice for inválido
-    while (i == -1 || i > numVertices - 1)
+    while (i <= -1 || i > numVertices - 1)
     {
         cout << endl
              << " ---- VÉRTICE INVÁLIDO ---- " << endl
@@ -307,6 +306,7 @@ void Grafo::arvoreGeradoraPrim()
         int kMenor = -1;
         bool tIgualAN = true;
 
+        
         for (int j = 0; j < numVertices; j++)
         {
 
@@ -315,11 +315,12 @@ void Grafo::arvoreGeradoraPrim()
 
                 for (int k = 0; k < numVertices; k++)
                 {
-
+                    
                     if (conjuntoV[k] != -1)
                     {
 
-                        if ((menorValor > pesos[j][k] && j != k && pesos[j][k] != 0) || menorValor == -1)
+                        // pesos[j][k] == 0 significa que a aresta (j,k) não existe
+                        if ((menorValor != -1 && menorValor > pesos[j][k] && j < k && pesos[j][k] != 0) ||( menorValor == -1 &&  pesos[j][k] != 0))
                         {
                             menorValor = pesos[j][k];
                             jMenor = j;
@@ -327,6 +328,7 @@ void Grafo::arvoreGeradoraPrim()
                         }
                     }
                 }
+
             }
             else
             {
@@ -342,6 +344,8 @@ void Grafo::arvoreGeradoraPrim()
 
             // Remover o K de V
             conjuntoV[kMenor] = -1;
+
+            cout << jMenor << " -> " << kMenor << endl;
 
             // Adicionar a aresta (j,k) no Tmin
             conjuntoTmin[jMenor].inserir(kMenor);
@@ -420,9 +424,12 @@ void Grafo::arvoreGeradoraMinimaKruskal()
 
         while (verticeAdjacente != -1)
         {
-
-            listAresta[indexH] = Aresta(i, verticeAdjacente, pesos[i][verticeAdjacente]);
-            indexH++;
+            // Matriz Triangulo Superior
+            if (i < verticeAdjacente)
+            {
+                listAresta[indexH] = Aresta(i, verticeAdjacente, pesos[i][verticeAdjacente]);
+                indexH++;
+            }
 
             j++;
             verticeAdjacente = vertices[i].get(j);
@@ -433,7 +440,6 @@ void Grafo::arvoreGeradoraMinimaKruskal()
 
     bubbleSort(listAresta, indexH);
 
-   
     // T é o conjunto de arestas da árvore em construção
     ListaAdjacencia *conjuntoT = new ListaAdjacencia[numVertices];
 
@@ -500,7 +506,7 @@ void Grafo::arvoreGeradoraMinimaKruskal()
         }
 
         // Acrescenta + 2 no iterador i do vetor H de arestas, porque as arestas estão duplicadas (u,v) = (v,u)
-        a = a + 2;
+        a = a + 1;
     }
 
     // Escrever Árvore Geradora Mínima formada pelas arestas do conjunto T
@@ -527,12 +533,14 @@ void Grafo::arvoreGeradoraMinimaKruskal()
     delete[] listAresta;
 }
 
-void Grafo::buscaLargura(int origem) {
+void Grafo::buscaLargura(int origem)
+{
     int i;
     bool *visitados = new bool[numVertices];
 
     //marca todos os vertices como nao visitados
-    for(i=0; i<numVertices; i++){
+    for (i = 0; i < numVertices; i++)
+    {
         visitados[i] = false;
     }
 
@@ -543,20 +551,21 @@ void Grafo::buscaLargura(int origem) {
     fila.push_back(origem);
 
     while (!fila.empty())
-    {   
+    {
         int j;
         //tira da fila e printa
         origem = fila.front();
         cout << origem << " ";
         fila.pop_front();
 
-        for(i=0; i < vertices[origem].tamanho(); i++){
+        for (i = 0; i < vertices[origem].tamanho(); i++)
+        {
             j = vertices[origem].get(i);
-            if(!visitados[j] && j > origem){//verifico se n foi visitado e se é filho
+            if (!visitados[j] && j > origem)
+            { //verifico se n foi visitado e se é filho
                 visitados[j] = true;
                 fila.push_back(j);
             }
         }
     }
-    
 }
