@@ -633,30 +633,24 @@ void Grafo::caminhoMinimoFloyd()
 
                 //Checa se o custo da origem até o nó atual é menor do que o custo 
                 //saindo da origem e passando por um nó intermediário até o nó atual
-
-                //E também se há presença de ciclo negativo
                 
-                if(((L[i][k] < infinito) && (L[k][j] < infinito)) && L[i][j]>0) 
+                if(((L[i][k] < infinito) && (L[k][j] < infinito))) 
                 {
                     if(L[i][j] > (L[i][k] + L[k][j]))
                     {
                         L[i][j] = L[i][k] + L[k][j];
 
+                        //Salvando maior numero pra enviar pra formatação da matriz
                         if(L[i][j]>maior)
                         maior = L[i][j];
 
+                        //Salvando menor numero  negativo pra enviar pra formatação da matriz
                         if(L[i][j]<menor)
                         menor = L[i][j];
 
                     }
                 }
-                else
-                {
-                    if(L[i][j]<0)
-                    {
-                        L[i][j] = infinito;
-                    }
-                }
+              
             }
         }
     }
