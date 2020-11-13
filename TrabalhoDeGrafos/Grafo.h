@@ -26,7 +26,10 @@ class Grafo
         void imprimeMatriz(int **matriz, int maiorValor, int menorNegativo);
         bool existeAdjacencia(int i, int j);
 
+        void buscaLargura(int origem);
+        void buscaProf();
     private:
+        void PROF(int index, bool visitados[]);
         ListaAdjacencia* vertices;
         int numVertices;
         int** pesos;
