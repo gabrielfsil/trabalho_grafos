@@ -198,13 +198,15 @@ int main(int argc, char *argv[])
     //grafo = leGrafoComPeso(argv[1]);
 
     // Lê o grafo no arquivo de entrada
-    grafo = readGrafo(argv[1]);
+     grafo = readGrafo(argv[1]);
 
     int comando = -1;
 
     grafo->imprimeGrafo();
 
-    while (comando != 0)
+    grafo->algoritmoGulosoSD();
+
+   /* while (comando != 0)
     {
 
         cout << endl
@@ -245,9 +247,9 @@ int main(int argc, char *argv[])
             grafo->caminhoMinimoDijkstra(vertice);
             break;
         case 4:
-            // Busca caminho mínimo por Floyd no grafo
+            // Busca caminho mínimo por no grafo
             grafo->caminhoMinimoFloyd();
-
+            // Busca caminho mínimo por Floyd no grafo
             break;
         case 5:
             // Árvore Geradora por Prim no grafo
@@ -268,11 +270,11 @@ int main(int argc, char *argv[])
          << "Encerrando programa..." << endl;
     cout << endl
          << "Obrigado pela preferência!" << endl;
-    cout << "Volte sempre! ;)" << endl;
+    cout << "Volte sempre! ;)" << endl;*/
 
-    grafo->imprimeGrafo();
-    grafo->imprimirMatrizPeso();
-    cout << "    "<< endl;
+   // grafo->imprimeGrafo();
+  //  grafo->imprimirMatrizPeso();
+   // cout << "    "<< endl;
 
     escreveSaida(grafo, argv[2]);
 

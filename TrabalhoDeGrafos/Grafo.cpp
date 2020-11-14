@@ -781,3 +781,144 @@ void Grafo::buscaProf()
         }
     }
 }
+
+
+void Grafo::ordenaCandidatos (int candidatos[], int graus[])
+{
+     int k, j, aux;
+
+     for ( k = 0; k < numVertices ; k++)
+    {
+        for ( j = k; j < numVertices; j++)
+        {
+            //cout <<"k | j : " << k << " " << j << endl;
+            
+            //cout<<"grau k | grau j : " << graus[k] << " " << graus[j] << endl;
+            if (graus[candidatos[k]] < graus[candidatos[j]])
+            {
+                aux = candidatos[k];
+                candidatos[k] = candidatos[j];
+                candidatos[j] = aux;
+            }
+
+        }
+    }
+}
+
+void Grafo::algoritmoGulosoSD()
+{
+    //Conjunto C de vértics candidatos a solução
+    int * C = new int[numVertices];
+
+    int* G = new int[numVertices];
+
+    int candidatos = numVertices;
+
+    //Conjunto W de vértices que são adjacentes aos vértices escolhidos
+    //para solução
+
+    bool *W = new bool[numVertices];
+    int contemplados = 0;
+
+    //Conjunto S solução
+    int *S = new int[numVertices];
+    int solucao = 0;
+
+    //Inicializando vetor de candidatos com os vértices do grafo
+    for (int i=0; i<numVertices; i++)
+    {
+        C[i] = i;
+        G[i] = vertices[i].tamanho();
+        cout << "G["<<i <<"]" << G[i] << endl;
+    }
+
+    //Ordenando candidatos em ordem descrescente de grau
+    ordenaCandidatos(C, G);
+
+    for (int i=0; i<numVertices; i++)
+    {
+        cout << C[i] << endl;
+    }
+
+    //Inicializando vetor de vértices contemplados com false
+    for (int i=0; i<numVertices; i++)
+    {
+        W[i] = false;
+    }
+
+    int j = 0; //iteração do conjunto solução
+
+    int k = 0;//iteração dos candidatos
+
+  
+    while(contemplados < numVertices)
+    {
+        //Escolhendo um candidato
+        int Vc = C[k];
+        
+        cout << "k: " << k << endl;
+
+        cout << " candidato: " << Vc << endl;
+
+        cout << "vertices: " << numVertices << endl;
+
+
+        //Se o vértice escolhido ainda não foi contemplado ou não está no conjunto solução
+        if(W[Vc]==false)
+        {
+            //Vértice vai pro conjunto solução e atualizamos a quantidade de candidatos
+            S[j] = Vc;
+            j++;
+            solucao = j;
+
+
+            W[Vc] = true;
+            contemplados++;
+
+            cout << "contemplados: " << contemplados << endl;
+
+
+            //Adicionando adjacentes do vertice escolhido ao conjunto W de contemplados
+            for(int m=0; m <= vertices[Vc].tamanho(); m++)
+            {
+                if(m!=Vc) 
+                {
+                    cout << "[" << m << "]" << "[" << Vc << "]" << endl;
+                    if(existeAdjacencia(m,Vc))
+                    {
+                        W[m] = true;
+                        cout << "adjacentes: true" << endl;
+                        contemplados++;
+                    }
+                cout << "contemplados: " << contemplados << endl;
+                }
+          
+            }
+        }
+
+        cout << "vertices e contemplados: " << numVertices << " " <<  contemplados << endl;
+
+        k++;
+    }
+
+
+    cout << "Subconjunto dominante: " <<endl;
+
+    cout << '[' ;
+    for(int i=0; i<solucao; i++)
+    {
+        cout << S[i] ;
+        if(i!=solucao-1)
+        {
+            cout << ',' ;
+        }
+    }
+
+    cout << ']' << endl;
+
+
+    delete C;
+    delete G;
+    delete W;
+    delete S;
+}

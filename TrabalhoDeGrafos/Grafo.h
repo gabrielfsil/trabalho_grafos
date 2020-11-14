@@ -28,6 +28,11 @@ class Grafo
 
         void buscaLargura(int origem);
         void buscaProf();
+
+        void algoritmoGulosoSD();
+        void ordenaCandidatos(int candidatos[], int graus[]);
+
+
     private:
         void PROF(int index, bool visitados[]);
         ListaAdjacencia* vertices;
