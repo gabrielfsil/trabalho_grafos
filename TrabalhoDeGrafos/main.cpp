@@ -195,10 +195,10 @@ int main(int argc, char *argv[])
 
     Grafo *grafo;
 
-    //grafo = leGrafoComPeso(argv[1]);
+    grafo = leGrafoComPeso(argv[1]);
 
     // Lê o grafo no arquivo de entrada
-     grafo = readGrafo(argv[1]);
+    //grafo = readGrafo(argv[1]);
 
     int comando = -1;
 
