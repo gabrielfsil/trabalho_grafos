@@ -829,16 +829,16 @@ void Grafo::algoritmoGulosoSD()
     {
         C[i] = i;
         G[i] = vertices[i].tamanho();
-        cout << "G["<<i <<"]" << G[i] << endl;
+       // cout << "G["<<i <<"]" << G[i] << endl;
     }
 
     //Ordenando candidatos em ordem descrescente de grau
     ordenaCandidatos(C, G);
 
-    for (int i=0; i<numVertices; i++)
+    /*for (int i=0; i<numVertices; i++)
     {
         cout << C[i] << endl;
-    }
+    }*/
 
     //Inicializando vetor de vértices contemplados com false
     for (int i=0; i<numVertices; i++)
@@ -856,11 +856,11 @@ void Grafo::algoritmoGulosoSD()
         //Escolhendo um candidato
         int Vc = C[k];
         
-        cout << "k: " << k << endl;
+        //cout << "k: " << k << endl;
 
-        cout << " candidato: " << Vc << endl;
+        //cout << " candidato: " << Vc << endl;
 
-        cout << "vertices: " << numVertices << endl;
+        //cout << "vertices: " << numVertices << endl;
 
 
         //Se o vértice escolhido ainda não foi contemplado ou não está no conjunto solução
@@ -875,7 +875,7 @@ void Grafo::algoritmoGulosoSD()
             W[Vc] = true;
             contemplados++;
 
-            cout << "contemplados: " << contemplados << endl;
+            //cout << "contemplados: " << contemplados << endl;
 
 
             //Adicionando adjacentes do vertice escolhido ao conjunto W de contemplados
@@ -883,25 +883,26 @@ void Grafo::algoritmoGulosoSD()
             {
                 if(m!=Vc) 
                 {
-                    cout << "[" << m << "]" << "[" << Vc << "]" << endl;
+                    //cout << "[" << m << "]" << "[" << Vc << "]" << endl;
                     if(existeAdjacencia(m,Vc))
                     {
                         W[m] = true;
-                        cout << "adjacentes: true" << endl;
+                        //cout << "adjacentes: true" << endl;
                         contemplados++;
                     }
-                cout << "contemplados: " << contemplados << endl;
+                //cout << "contemplados: " << contemplados << endl;
                 }
           
             }
         }
 
-        cout << "vertices e contemplados: " << numVertices << " " <<  contemplados << endl;
+        //cout << "vertices e contemplados: " << numVertices << " " <<  contemplados << endl;
 
         k++;
     }
 
 
+    cout << "" << endl;
     cout << "Subconjunto dominante: " <<endl;
 
     cout << '[' ;
