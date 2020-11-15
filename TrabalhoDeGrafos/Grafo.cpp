@@ -812,24 +812,27 @@ void Grafo::algoritmoGulosoSD()
 
     int* G = new int[numVertices];
 
-    int candidatos = numVertices;
-
     //Conjunto W de vértices que são adjacentes aos vértices escolhidos
     //para solução
 
     bool *W = new bool[numVertices];
     int contemplados = 0;
 
-    //Conjunto S solução
-    int *S = new int[numVertices];
+    //Conjunto S solução onde marcamos true os vértices que compõe a solução
+    bool *S = new bool[numVertices];
     int solucao = 0;
 
-    //Inicializando vetor de candidatos com os vértices do grafo
+    //Vetor para guardar os vértices do conjunto solução
+    int *resultado = new int[numVertices];
+
+    //Inicializando vetor de candidatos com os vértices do grafo e
+    //inicializando o vetor de graus dos vértices do grafo com seus respectivos graus
+    //(tamanho da lista de adjacência)
     for (int i=0; i<numVertices; i++)
     {
         C[i] = i;
         G[i] = vertices[i].tamanho();
-       // cout << "G["<<i <<"]" << G[i] << endl;
+        //cout << "G["<<i <<"]" << G[i] << endl;
     }
 
     //Ordenando candidatos em ordem descrescente de grau
@@ -838,12 +841,13 @@ void Grafo::algoritmoGulosoSD()
     /*for (int i=0; i<numVertices; i++)
     {
         cout << C[i] << endl;
-    }*/
+    */
 
-    //Inicializando vetor de vértices contemplados com false
+    //Inicializando vetor de vértices contemplados e vertices da solução com false
     for (int i=0; i<numVertices; i++)
     {
         W[i] = false;
+        S[i] = false;
     }
 
     int j = 0; //iteração do conjunto solução
@@ -862,12 +866,12 @@ void Grafo::algoritmoGulosoSD()
 
         //cout << "vertices: " << numVertices << endl;
 
-
-        //Se o vértice escolhido ainda não foi contemplado ou não está no conjunto solução
-        if(W[Vc]==false)
+        //Se o vértice escolhido ainda não foi contemplado (ou não está no conjunto solução)
+        if((W[Vc]==false))
         {
-            //Vértice vai pro conjunto solução e atualizamos a quantidade de candidatos
-            S[j] = Vc;
+            //Vértice vai pro conjunto solução 
+            S[Vc] = true;
+            resultado[j] = Vc;
             j++;
             solucao = j;
 
@@ -875,26 +879,78 @@ void Grafo::algoritmoGulosoSD()
             W[Vc] = true;
             contemplados++;
 
+
             //cout << "contemplados: " << contemplados << endl;
 
 
             //Adicionando adjacentes do vertice escolhido ao conjunto W de contemplados
-            for(int m=0; m <= vertices[Vc].tamanho(); m++)
+            for(int m=0; m < (vertices[Vc].tamanho()); m++)
             {
-                if(m!=Vc) 
+                //vertice adjacente Va
+                int Va = vertices[Vc].get(m);
+                //cout << "m = " << m << endl;
+                //cout << "Va = " << Va << endl;
+
+                //Se existe a adjacência e o vértice ainda não foi contemplado
+                
+                if(( Va!=-1) && (W[Va]==false))
                 {
-                    //cout << "[" << m << "]" << "[" << Vc << "]" << endl;
-                    if(existeAdjacencia(m,Vc))
+                        //cout << "[" << Va << "]" << "[" << Vc << "]" << endl;
+                        W[Va] = true;
+                       // cout << "adjacentes: true" << endl;
+
+                       // cout << "W["<< Va << "] = " << W[Va] << endl;
+                        contemplados++;
+                }
+                //else cout << "adjacentes: false" << endl;
+
+                //cout << "contemplados: " << contemplados << endl;
+                
+          
+            }            
+        }
+        //Na iteração, se o vértice da vez foi contemplado mas ainda não está no conjunto solução 
+        //temos que verificar se o mesmo possui algum vizinho que ainda não foi contemplado, 
+        //então assim podemos adicionar esse vértice ao conjunto solução e seu adjacente passa
+        //a ser contemplado
+        
+        else if(S[Vc] == false)
+        {
+            //Contador para guardar os vizinhos do vértice Vc que foram contemplados
+            int cont = 0;
+
+            for(int m=0; m < (vertices[Vc].tamanho()); m++)
+            {
+                //vertice adjacente Va
+                int Va = vertices[Vc].get(m);
+
+                //cout << "m = " << m << endl;
+                //cout << "Va = " << Va << endl;
+                
+                    if(( Va!=-1) && W[Va]==false)
                     {
-                        W[m] = true;
-                        //cout << "adjacentes: true" << endl;
+                        //cout << "[" << Va << "]" << "[" << Vc << "]" << endl;
+                        cont++;                    
+
+                        W[Va] = true;
+                        //cout << "adjacente de "<< Vc << ": true" << endl;
                         contemplados++;
                     }
+
                 //cout << "contemplados: " << contemplados << endl;
-                }
+                
           
             }
+            if(cont!=0)
+            {
+                S[Vc] = true;
+                resultado[j] = Vc;    
+                j++;
+                solucao = j;
+
+            }
         }
+        
 
         //cout << "vertices e contemplados: " << numVertices << " " <<  contemplados << endl;
 
@@ -908,7 +964,7 @@ void Grafo::algoritmoGulosoSD()
     cout << '[' ;
     for(int i=0; i<solucao; i++)
     {
-        cout << S[i] ;
+        cout << resultado[i] ;
         if(i!=solucao-1)
         {
             cout << ',' ;
@@ -922,4 +978,5 @@ void Grafo::algoritmoGulosoSD()
     delete G;
     delete W;
     delete S;
+    delete resultado;
 }

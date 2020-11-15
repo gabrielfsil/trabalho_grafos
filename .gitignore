@@ -2,4 +2,6 @@
 /TrabalhoDeGrafos/*.exe
 
 /TrabalhoDeGrafos/*.out
+Saida.txt
+
 .vscode
