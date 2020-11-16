@@ -4,7 +4,12 @@
 #include "No.h"
 #include <iostream>
 #include <fstream>
-#include <iomanip>  
+#include <iomanip>
+#include <cstdlib>
+#include <ctime>  
+#include <math.h>
+#include <thread>
+#include <chrono> 
 
 
 
@@ -805,7 +810,7 @@ void Grafo::ordenaCandidatos (int candidatos[], int graus[])
     }
 }
 
-void Grafo::algoritmoGulosoSD()
+int Grafo::algoritmoGulosoSD()
 {
     //Conjunto C de vértics candidatos a solução
     int * C = new int[numVertices];
@@ -978,5 +983,99 @@ void Grafo::algoritmoGulosoSD()
     delete G;
     delete W;
     delete S;
-    delete resultado;
+    return solucao;
+}
+
+
+int naoContemplados(bool contemplados[], int numVertices){
+    int resultado = 0;
+    for(int i = 0; i < numVertices; i++){
+        if (!contemplados[i]){
+            resultado++;
+        }
+    }
+    return resultado;
+}
+
+void Grafo::algoritmoGulosoRandomizado(float alfa, int semente){
+    
+    srand(time(0)+semente);
+
+    int iteracoes = 0;
+    int LIMITE_ITERACOES = 900;
+    int iteracoesSemMelhora = 0;
+    int LIMITE_ITERACOES_SEM_MELHORA = 300;
+
+    int* possivelSolucao;
+    int* melhorSolucao;
+    int tamanhoDaMelhorSolucao = algoritmoGulosoSD();
+    int* candidatos;
+    bool* contemplados;
+    int numeroDeNaoContemplados;
+    int numeroMaximoDeCandidatos;
+
+    int* vetorOrdenadoDeVertices = new int[numVertices];
+    int* vetorDeGraus = new int[numVertices];
+
+    int posicaoCandidato;
+    int posicaoPossivelSolucao;
+
+    for (int i=0; i<numVertices; i++)
+    {
+        vetorOrdenadoDeVertices[i] = i;
+        vetorDeGraus[i] = vertices[i].tamanho();
+    }
+    ordenaCandidatos(vetorOrdenadoDeVertices, vetorDeGraus);
+    
+    while(iteracoes < LIMITE_ITERACOES && iteracoesSemMelhora < LIMITE_ITERACOES_SEM_MELHORA){
+        possivelSolucao = new int[numVertices];
+        contemplados = new bool[numVertices];
+        for(int i = 0; i < numVertices; i++){
+            possivelSolucao[i] = -1;
+            contemplados[i] = false;
+        }
+        posicaoPossivelSolucao = 0;
+        numeroDeNaoContemplados = naoContemplados(contemplados, numVertices);
+        while(numeroDeNaoContemplados > 0){
+            numeroMaximoDeCandidatos = ceil((alfa*(numeroDeNaoContemplados)));
+            candidatos = new int[numeroMaximoDeCandidatos];
+            posicaoCandidato = 0;
+            for(int i = 0; (i < numVertices) && (posicaoCandidato < numeroMaximoDeCandidatos); i++){
+                if(!contemplados[vetorOrdenadoDeVertices[i]]){
+                    candidatos[posicaoCandidato] = vetorOrdenadoDeVertices[i];
+                    posicaoCandidato++;
+                }
+            }
+            if(posicaoCandidato > 1){
+                possivelSolucao[posicaoPossivelSolucao] = candidatos[(rand()%(posicaoCandidato))];
+            } else {
+                possivelSolucao[posicaoPossivelSolucao] = candidatos[0];
+            }
+            contemplados[possivelSolucao[posicaoPossivelSolucao]] = true;
+            for(int i = 0; i < vertices[possivelSolucao[posicaoPossivelSolucao]].tamanho(); i++){
+                contemplados[vertices[possivelSolucao[posicaoPossivelSolucao]].get(i)] = true;
+            }
+            posicaoPossivelSolucao++;
+            numeroDeNaoContemplados = naoContemplados(contemplados, numVertices);
+            delete [] candidatos;
+        }
+        if(tamanhoDaMelhorSolucao > posicaoPossivelSolucao){
+            melhorSolucao = possivelSolucao;
+            tamanhoDaMelhorSolucao = posicaoPossivelSolucao;
+            iteracoesSemMelhora = 0;
+            cout << "NOVA MELHOR SOLUÇÃO:\n[";
+            for(int i = 0; i < posicaoPossivelSolucao; i++){
+                if(i == posicaoPossivelSolucao - 1){
+                    cout << melhorSolucao[i];
+                } else {
+                    cout << melhorSolucao[i] << ",";
+                }
+            }
+            cout << "]" << endl;;
+        } else {
+            iteracoesSemMelhora++;
+        }
+        iteracoes++;
+        delete [] possivelSolucao;
+    }
 }

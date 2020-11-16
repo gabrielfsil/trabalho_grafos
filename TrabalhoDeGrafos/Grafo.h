@@ -29,8 +29,10 @@ class Grafo
         void buscaLargura(int origem);
         void buscaProf();
 
-        void algoritmoGulosoSD();
+        int algoritmoGulosoSD();
         void ordenaCandidatos(int candidatos[], int graus[]);
+
+        void algoritmoGulosoRandomizado(float alfa, int semente);
 
 
     private:

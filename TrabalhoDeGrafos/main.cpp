@@ -202,9 +202,28 @@ int main(int argc, char *argv[])
 
     int comando = -1;
 
-    grafo->imprimeGrafo();
+    //grafo->imprimeGrafo();
 
-    grafo->algoritmoGulosoSD();
+    cout << "\n\nALFA: 0.1" << endl;
+    for(int i = 0; i < 10; i++){
+        grafo->algoritmoGulosoRandomizado(0.1,i);
+    }
+    cout << "\n\nALFA: 0.2" << endl;
+    for(int i = 0; i < 10; i++){
+        grafo->algoritmoGulosoRandomizado(0.2,i);
+    }
+    cout << "\n\nALFA: 0.3" << endl;
+    for(int i = 0; i < 10; i++){
+        grafo->algoritmoGulosoRandomizado(0.3,i);
+    }
+    cout << "\n\nALFA: 0.5" << endl;
+    for(int i = 0; i < 10; i++){
+        grafo->algoritmoGulosoRandomizado(0.5,i);
+    }
+    cout << "\n\nALFA: 0.7" << endl;
+    for(int i = 0; i < 10; i++){
+        grafo->algoritmoGulosoRandomizado(0.7,i);
+    }
 
    /* while (comando != 0)
     {
