@@ -206,7 +206,7 @@ int main(int argc, char *argv[])
 
     grafo->algoritmoGulosoSD();
 
-   /* while (comando != 0)
+    while (comando != 0)
     {
 
         cout << endl
@@ -270,7 +270,7 @@ int main(int argc, char *argv[])
          << "Encerrando programa..." << endl;
     cout << endl
          << "Obrigado pela preferência!" << endl;
-    cout << "Volte sempre! ;)" << endl;*/
+    cout << "Volte sempre! ;)" << endl;
 
    // grafo->imprimeGrafo();
   //  grafo->imprimirMatrizPeso();
