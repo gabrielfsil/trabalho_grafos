@@ -999,22 +999,24 @@ int naoContemplados(bool contemplados[], int numVertices){
 
 void Grafo::algoritmoGulosoRandomizado(float alfa, int semente){
     
-    srand(time(0)+semente);
+    
+    srand(time(0)+semente); //Definindo semente da função rand
 
+    //Contadores e limites
     int iteracoes = 0;
-    int LIMITE_ITERACOES = 900;
+    int LIMITE_ITERACOES = 500;
     int iteracoesSemMelhora = 0;
-    int LIMITE_ITERACOES_SEM_MELHORA = 300;
+    int LIMITE_ITERACOES_SEM_MELHORA = 200;
 
-    int* possivelSolucao;
-    int* melhorSolucao;
-    int tamanhoDaMelhorSolucao = algoritmoGulosoSD();
-    int* candidatos;
-    bool* contemplados;
+    int* possivelSolucao;                               //Possível solução encontrada em um iteração
+    int* melhorSolucao;                                 //Melhor solução encontrada
+    int tamanhoDaMelhorSolucao = algoritmoGulosoSD();   //Quantidade de vértice na melhor solução (Começa como o resultado do algoritmo guloso)
+    int* candidatos;                                    //Candidatos a entrar na possível solução
+    bool* contemplados;                                 //Vetor que indica os vértices contemplados
     int numeroDeNaoContemplados;
     int numeroMaximoDeCandidatos;
 
-    int* vetorOrdenadoDeVertices = new int[numVertices];
+    int* vetorOrdenadoDeVertices = new int[numVertices]; //Vetores ordenados para facilitar a execução
     int* vetorDeGraus = new int[numVertices];
 
     int posicaoCandidato;
@@ -1025,9 +1027,10 @@ void Grafo::algoritmoGulosoRandomizado(float alfa, int semente){
         vetorOrdenadoDeVertices[i] = i;
         vetorDeGraus[i] = vertices[i].tamanho();
     }
-    ordenaCandidatos(vetorOrdenadoDeVertices, vetorDeGraus);
+    ordenaCandidatos(vetorOrdenadoDeVertices, vetorDeGraus);//Ordenando vetores em ordem decrescente de graus
     
     while(iteracoes < LIMITE_ITERACOES && iteracoesSemMelhora < LIMITE_ITERACOES_SEM_MELHORA){
+        //Iniciando vetores e variáveis
         possivelSolucao = new int[numVertices];
         contemplados = new bool[numVertices];
         for(int i = 0; i < numVertices; i++){
@@ -1036,21 +1039,26 @@ void Grafo::algoritmoGulosoRandomizado(float alfa, int semente){
         }
         posicaoPossivelSolucao = 0;
         numeroDeNaoContemplados = naoContemplados(contemplados, numVertices);
+        //Obtendo solução
         while(numeroDeNaoContemplados > 0){
+            //Limitando a quantidade de candidatos para alfa*numeroDeNaoContemplados arredondado para cima caso possuir decimal
             numeroMaximoDeCandidatos = ceil((alfa*(numeroDeNaoContemplados)));
             candidatos = new int[numeroMaximoDeCandidatos];
             posicaoCandidato = 0;
+            //Obtendo candidatos (primeiro do vetor ordenado que não estão contemplados)
             for(int i = 0; (i < numVertices) && (posicaoCandidato < numeroMaximoDeCandidatos); i++){
                 if(!contemplados[vetorOrdenadoDeVertices[i]]){
                     candidatos[posicaoCandidato] = vetorOrdenadoDeVertices[i];
                     posicaoCandidato++;
                 }
             }
+            //Obtendo vértice aleatório dos candidatos
             if(posicaoCandidato > 1){
                 possivelSolucao[posicaoPossivelSolucao] = candidatos[(rand()%(posicaoCandidato))];
             } else {
                 possivelSolucao[posicaoPossivelSolucao] = candidatos[0];
             }
+            //Atualizando contemplados
             contemplados[possivelSolucao[posicaoPossivelSolucao]] = true;
             for(int i = 0; i < vertices[possivelSolucao[posicaoPossivelSolucao]].tamanho(); i++){
                 contemplados[vertices[possivelSolucao[posicaoPossivelSolucao]].get(i)] = true;
@@ -1059,6 +1067,7 @@ void Grafo::algoritmoGulosoRandomizado(float alfa, int semente){
             numeroDeNaoContemplados = naoContemplados(contemplados, numVertices);
             delete [] candidatos;
         }
+        //Comparando possivel solução com a melhor solução
         if(tamanhoDaMelhorSolucao > posicaoPossivelSolucao){
             melhorSolucao = possivelSolucao;
             tamanhoDaMelhorSolucao = posicaoPossivelSolucao;
