@@ -195,37 +195,66 @@ int main(int argc, char *argv[])
 
     Grafo *grafo;
 
-    grafo = leGrafoComPeso(argv[1]);
+    int leitura = -1;
+    cout << endl
+         << "=========== Arquivo de Leitura ===========" << endl
+         << endl;
+    cout << "[1] Leitura com peso nas arestas" << endl;
+    cout << "[2] Leitura com peso nos vértices" << endl;
+    cout << endl
+         << "============================" << endl;
+
+    cout << endl
+         << "Escolha uma das operações do menu: ";
+    cin >> leitura;
 
     // Lê o grafo no arquivo de entrada
-    //grafo = readGrafo(argv[1]);
+    if (leitura == 1)
+    {
+        grafo = readGrafo(argv[1]);
+    }
+    else
+    {
+
+        grafo = leGrafoComPeso(argv[1]);
+        leitura = 2;
+    }
 
     int comando = -1;
 
     //grafo->imprimeGrafo();
+    if (leitura == 2)
+    {
+        grafo->algoritmoGulosoSD();
 
-    cout << "\n\nALFA: 0.1" << endl;
-    for(int i = 0; i < 10; i++){
-        grafo->algoritmoGulosoRandomizado(0.1,i);
-    }
-    cout << "\n\nALFA: 0.2" << endl;
-    for(int i = 0; i < 10; i++){
-        grafo->algoritmoGulosoRandomizado(0.2,i);
-    }
-    cout << "\n\nALFA: 0.3" << endl;
-    for(int i = 0; i < 10; i++){
-        grafo->algoritmoGulosoRandomizado(0.3,i);
-    }
-    cout << "\n\nALFA: 0.5" << endl;
-    for(int i = 0; i < 10; i++){
-        grafo->algoritmoGulosoRandomizado(0.5,i);
-    }
-    cout << "\n\nALFA: 0.7" << endl;
-    for(int i = 0; i < 10; i++){
-        grafo->algoritmoGulosoRandomizado(0.7,i);
+        cout << "\n\nALFA: 0.1" << endl;
+        for (int i = 0; i < 10; i++)
+        {
+            grafo->algoritmoGulosoRandomizado(0.1, i);
+        }
+        cout << "\n\nALFA: 0.2" << endl;
+        for (int i = 0; i < 10; i++)
+        {
+            grafo->algoritmoGulosoRandomizado(0.2, i);
+        }
+        cout << "\n\nALFA: 0.3" << endl;
+        for (int i = 0; i < 10; i++)
+        {
+            grafo->algoritmoGulosoRandomizado(0.3, i);
+        }
+        cout << "\n\nALFA: 0.5" << endl;
+        for (int i = 0; i < 10; i++)
+        {
+            grafo->algoritmoGulosoRandomizado(0.5, i);
+        }
+        cout << "\n\nALFA: 0.7" << endl;
+        for (int i = 0; i < 10; i++)
+        {
+            grafo->algoritmoGulosoRandomizado(0.7, i);
+        }
     }
 
-    while (comando != 0)
+    while (comando != 0 && leitura == 1)
     {
 
         cout << endl
@@ -255,7 +284,7 @@ int main(int argc, char *argv[])
             break;
         case 2:
             // Realiza caminhamento em profundidade no grafo
-             grafo->buscaProf();
+            grafo->buscaProf();
             break;
         case 3:
             // Busca caminho mínimo por Dijkstra no grafo
@@ -291,9 +320,6 @@ int main(int argc, char *argv[])
          << "Obrigado pela preferência!" << endl;
     cout << "Volte sempre! ;)" << endl;
 
-   // grafo->imprimeGrafo();
-  //  grafo->imprimirMatrizPeso();
-   // cout << "    "<< endl;
 
     escreveSaida(grafo, argv[2]);
 
